@@ -7,7 +7,7 @@
             :eventStartDateTime="event.eventStartDateTime"
             :eventEndDateTime="event.eventEndDateTime"
             :eventDesc="event.eventDesc"
-            :eventTags="event.eventTags" />
+            :eventTags="event.eventTags"/>
       </div>
     </div>
   </div>
