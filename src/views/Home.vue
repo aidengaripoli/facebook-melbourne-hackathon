@@ -11,10 +11,10 @@
     </div>
 
     <div v-if="plan[0]" class="events">
-      <h1 class="title" style="padding-top: 3%">Accommodation</h1>
+      <h1 v-if="hotel" class="title" style="padding-top: 3%">Accommodation</h1>
 
       <HotelCard
-        v-if="hotel.name"
+        v-if="hotel"
         :hotel="hotel"
         hotelDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
       />
