@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     handleSubmit(submission) {
-      this.$emit('submit', submission)
+      this.$emit("submit", submission);
     }
   }
 };

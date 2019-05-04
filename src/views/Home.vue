@@ -1,17 +1,16 @@
 <template>
   <div>
     <div class="background">
-      <Banner @submit="submit" />
+      <Banner @submit="submit"/>
     </div>
-    <div class="section">
-      <div v-for="(day, index) in plan" class="container" :key="index">
-        <div class="card">
-          <div class="card-body">
-            {{ day.lunch.name }}
-            {{ day.middayevent.name }}
-            {{ day.dinner.name }}
-          </div>
-        </div>
+
+    <div class="events" style="padding-top: 3%">
+      <div v-for="(day, index) in plan" :key="index">
+        <EventCard :eventName="day.lunch.name" eventDesc="Lunch"/>
+        <i class="fas fa-arrow-down"></i>
+        <EventCard :eventName="day.middayevent.name" eventDesc="Middayevent"/>
+        <i class="fas fa-arrow-down"></i>
+        <EventCard :eventName="day.dinner.name" eventDesc="dinner"/>
       </div>
     </div>
   </div>
@@ -30,26 +29,32 @@
 <script>
 // @ is an alias to /src
 import Banner from "@/components/Banner.vue";
-import axios from 'axios'
+import EventCard from "@/components/EventCard.vue";
+import axios from "axios";
 
 export default {
   name: "home",
-  data () {
+  data() {
     return {
       plan: {}
-    }
+    };
   },
   components: {
-    Banner
+    Banner,
+    EventCard
   },
   methods: {
     submit(submission) {
-      console.log(submission)
-      axios.post('http://localhost:3000/generate', submission).then(res => {
-        this.plan = res.data.plan
-      }).catch(err => {
-        console.log(err)
-      })
+      console.log(submission);
+      axios
+        .post("http://localhost:3000/generate", submission)
+        .then(res => {
+          this.plan = res.data.plan;
+          console.log(this.plan);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
