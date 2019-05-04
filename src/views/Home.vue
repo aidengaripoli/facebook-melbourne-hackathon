@@ -4,6 +4,12 @@
       <Banner :isLoading="isLoading" @submit="submit"/>
     </div>
 
+    <div v-if="isLoading">
+      <div class="notification is-link">
+        Curating your trip...
+      </div>
+    </div>
+
     <div v-if="plan[0]" class="events">
       <h1 class="title" style="padding-top: 3%">Accommodation</h1>
 
@@ -40,6 +46,9 @@
           />
         </slide>
       </carousel>
+    </div>
+    <div v-else style="margin-top: 30px">
+      <p v-if="!isLoading">Please submit a criteria</p>
     </div>
   </div>
 </template>
@@ -78,6 +87,7 @@ export default {
   },
   methods: {
     submit(submission) {
+      this.plan = {}
       this.isLoading = true
       axios
         .post("http://localhost:3000/generate", submission)
