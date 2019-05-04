@@ -18,7 +18,10 @@
           </div>
           <div class="column is-paddingless">
             <figure class="image is-square">
-              <img :src="hotel.photo" alt="Placeholder image">
+              <img
+                :src="hotel.photo"
+                alt="https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg"
+              >
             </figure>
           </div>
         </div>
