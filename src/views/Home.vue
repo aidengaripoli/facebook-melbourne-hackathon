@@ -25,7 +25,7 @@
             <img v-else src="../assets/sunny.png">
           </h1>
           <div v-for="(event,key,index) in day" :key="index">
-            <span v-if="event != day.date">
+            <span v-if="event != day.date && event != day.weather">
               <EventCard
                 :event="event"
                 eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."

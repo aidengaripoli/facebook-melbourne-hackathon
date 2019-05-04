@@ -21,7 +21,11 @@
           </div>
           <div class="column is-paddingless">
             <figure class="image is-square">
-              <img :src="event.photo" alt="Placeholder image">
+              <img v-if="event.photo" :src="event.photo">
+              <img
+                v-else
+                src="https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg"
+              >
             </figure>
           </div>
         </div>
