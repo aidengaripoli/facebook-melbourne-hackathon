@@ -13,6 +13,8 @@
           <div class="column" style="padding: 20px">
             <h1 class="title is-4">{{event.name}}</h1>
             <i>{{eventDesc}}</i>
+            <br>
+            <b v-if="event.rating">Rating: {{event.rating}}/5</b>
           </div>
           <div class="column is-paddingless">
             <figure class="image is-square">
@@ -30,6 +32,7 @@
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+  width: 100%;
 }
 </style>
 

@@ -5,23 +5,25 @@
     </div>
 
     <div class="events">
-      <div v-for="(day, index) in plan" :key="index" style="padding-top: 3%">
-        <h1 class="title">Sunday 5th May</h1>
-        <EventCard
-          :event="day.lunch"
-          eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets conta"
-        />
-        <i class="fas fa-arrow-down" style="padding: 10px"></i>
-        <EventCard
-          :event="day.middayevent"
-          eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets conta"
-        />
-        <i class="fas fa-arrow-down"></i>
-        <EventCard
-          :event="day.dinner"
-          eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets conta"
-        />
-      </div>
+      <carousel :perPage="1">
+        <slide v-for="(day, index) in plan" :key="index" style="margin-bottom: 3%">
+          <h1 class="title" style="padding-top: 3%">{{ day.date | formatDate }}</h1>
+          <EventCard
+            :event="day.lunch"
+            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+          />
+          <i class="fas fa-arrow-down"></i>
+          <EventCard
+            :event="day.middayevent"
+            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+          />
+          <i class="fas fa-arrow-down"></i>
+          <EventCard
+            :event="day.dinner"
+            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+          />
+        </slide>
+      </carousel>
     </div>
   </div>
 </template>
@@ -41,6 +43,7 @@
 import Banner from "@/components/Banner.vue";
 import EventCard from "@/components/EventCard.vue";
 import axios from "axios";
+import moment from "moment";
 
 export default {
   name: "home",
@@ -65,6 +68,11 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    }
+  },
+  filters: {
+    formatDate(d) {
+      return moment(d).format("dddd, MMMM Do");
     }
   }
 };
