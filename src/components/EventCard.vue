@@ -1,11 +1,12 @@
 <template>
   <div
     class="columns is-vcentered"
-    style="padding-left: 12%; padding-right:20%; margin-top: 0.75rem;"
+    style="padding-left: 7%; padding-right:15%; margin-top: 0.75rem;"
   >
-    <div class="column">
-      <p>{{event.time[0]}}</p>-
-      <p>{{event.time[1]}}</p>
+    <div class="column" style="padding-right:5%">
+      <div class="title is-4">{{event.time[0]}}</div>
+      <div class="title is-4">-</div>
+      <div class="title is-4">{{event.time[1]}}</div>
     </div>
     <div class="card column is-10 is-paddingless">
       <div class="card-content is-paddingless">
