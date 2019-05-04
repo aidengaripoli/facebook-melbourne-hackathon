@@ -10,6 +10,9 @@
         <div class="media-content">
           <div class="content">
             <h1 class="title is-4">{{eventName}}</h1>
+            <div class="tags" v-for="tag in eventTags" v-bind:key="tag">
+              <span class="tag is-dark">{{tag}}</span>
+            </div>
             <b>{{eventDesc}}</b>
             <br>
             Start Time: <time datetime="eventStartDateTime">{{eventStartDateTime}}</time>
