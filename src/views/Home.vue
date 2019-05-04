@@ -39,9 +39,11 @@
               </span>
             </span>
           </div>
-          <button class="button is-info" @click="send">I like it! Send the itinerary to me!</button>
         </slide>
       </carousel>
+      <div style="padding:20px">
+        <button class="button is-info" @click="send">I like it! Send the itinerary to me!</button>
+      </div>
     </div>
     <div v-else style="margin-top: 30px">
       <p v-if="!isLoading">Please submit a criteria</p>
