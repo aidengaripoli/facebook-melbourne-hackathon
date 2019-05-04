@@ -4,23 +4,36 @@
       <Banner @submit="submit"/>
     </div>
 
-    <div class="events">
+    <div v-if="plan[0]" class="events">
+      <h1 class="title" style="padding-top: 3%">Accommodation</h1>
+
+      <HotelCard
+        v-if="hotel.name"
+        :hotel="hotel"
+        hotelDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      />
+
       <carousel :perPage="1">
         <slide v-for="(day, index) in plan" :key="index" style="margin-bottom: 3%">
           <h1 class="title" style="padding-top: 3%">{{ day.date | formatDate }}</h1>
           <EventCard
+            :event="day.morningevent"
+            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          />
+          <i class="fas fa-arrow-down"></i>
+          <EventCard
             :event="day.lunch"
-            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
           />
           |<br>|<br>|<br>|<br>
           <EventCard
             :event="day.middayevent"
-            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
           />
           |<br>|<br>|<br>|<br>
           <EventCard
             :event="day.dinner"
-            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
           />
         </slide>
       </carousel>
@@ -42,6 +55,7 @@
 // @ is an alias to /src
 import Banner from "@/components/Banner.vue";
 import EventCard from "@/components/EventCard.vue";
+import HotelCard from "@/components/HotelCard.vue";
 import axios from "axios";
 import moment from "moment";
 
@@ -49,12 +63,14 @@ export default {
   name: "home",
   data() {
     return {
-      plan: {}
+      plan: {},
+      hotel: {}
     };
   },
   components: {
     Banner,
-    EventCard
+    EventCard,
+    HotelCard
   },
   methods: {
     submit(submission) {
@@ -63,7 +79,9 @@ export default {
         .post("http://localhost:3000/generate", submission)
         .then(res => {
           this.plan = res.data.plan;
+          this.hotel = res.data.hotel;
           console.log(this.plan);
+          // console.log(res.data.hotel);
         })
         .catch(err => {
           console.log(err);
