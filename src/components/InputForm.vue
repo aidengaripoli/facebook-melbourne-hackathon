@@ -108,7 +108,7 @@ export default {
     });
   },
   methods: {
-    submit: function(event) {
+    submit: function() {
       var i;
       var checkedCriteria = [];
       for (i = 0; i < this.$data.criteria.length; i++) {
