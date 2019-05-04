@@ -14,11 +14,6 @@ export default new Router({
       component: Home
     },
     {
-      path: '/events',
-      name: 'events',
-      component: () => import(/* webpackChunkName: "events" */ './views/Events.vue')
-    },
-    {
       path: '/output',
       name: 'output',
       component: () => import(/* webpackChunkName: "output" */ './views/Output.vue')

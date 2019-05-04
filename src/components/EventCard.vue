@@ -1,11 +1,12 @@
 <template>
   <div
     class="columns is-vcentered"
-    style="padding-left: 12%; padding-right:20%; margin-top: 0.75rem;"
+    style="padding-left: 7%; padding-right:15%; margin-top: 0.75rem;"
   >
-    <div class="column">
-      <p>{{event.time[0]}}</p>-
-      <p>{{event.time[1]}}</p>
+    <div class="column" style="padding-right:5%">
+      <div class="title is-4">{{event.time[0]}}</div>
+      <div class="title is-4">-</div>
+      <div class="title is-4">{{event.time[1]}}</div>
     </div>
     <div class="card column is-10 is-paddingless">
       <div class="card-content is-paddingless">
@@ -13,6 +14,8 @@
           <div class="column" style="padding: 20px">
             <h1 class="title is-4">{{event.name}}</h1>
             <i>{{eventDesc}}</i>
+            <p v-if="event.address">{{event.address}}</p>
+            <a v-if="event.website" :href="event.website">Website</a>
             <br>
             <b v-if="event.rating">Rating: {{event.rating}}/5</b>
           </div>
@@ -26,15 +29,6 @@
     </div>
   </div>
 </template>
-
-<style>
-.times {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
-  width: 100%;
-}
-</style>
 
 <script>
 export default {
