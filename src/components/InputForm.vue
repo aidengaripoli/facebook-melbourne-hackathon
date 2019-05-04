@@ -26,7 +26,7 @@
         </div>
         <div class="column">
           <div class="field">
-            <label class="label">Num Travelers</label>
+            <label class="label">No. of Travelers</label>
             <div class="select">
               <select v-model="travelers">
                 <option v-for="n in 10" v-bind:key="n">{{n}}</option>
