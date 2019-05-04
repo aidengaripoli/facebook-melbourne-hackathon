@@ -15,7 +15,10 @@
 
       <carousel :perPage="1">
         <slide v-for="(day, index) in plan" :key="index" style="margin-bottom: 3%">
-          <h1 class="title" style="padding-top: 3%">{{ day.date | formatDate }}</h1>
+          <h1 class="title" style="padding-top: 3%">{{ day.date | formatDate }}
+            <img v-if="day.weather == 'rainy'" src="../assets/rainy.png">
+            <img v-else src="../assets/sunny.png">
+            </h1>
           <EventCard
             :event="day.morningevent"
             eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
