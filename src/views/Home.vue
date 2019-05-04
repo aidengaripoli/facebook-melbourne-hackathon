@@ -1,19 +1,27 @@
 <template>
   <div class="container">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <Input msg="we did it reddit!"/>
+    <Banner/>
   </div>
 </template>
 
+<style>
+.background {
+  background-image: url("../assets/skyline.jpg");
+  background-color: #cccccc;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.3);
+  background-blend-mode: multiply;
+}
+</style>
+
 <script>
 // @ is an alias to /src
-import Input from "@/components/Input.vue";
+import Banner from "@/components/Banner.vue";
 
 export default {
   name: "home",
   components: {
-    Input
+    Banner
   }
 };
 </script>
