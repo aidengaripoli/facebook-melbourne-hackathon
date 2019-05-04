@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="background" style="padding-top: 3%">
-      <Banner @submit="submit"/>
+      <Banner :isLoading="isLoading" @submit="submit"/>
     </div>
 
     <div v-if="plan[0]" class="events">
@@ -64,7 +64,8 @@ export default {
   data() {
     return {
       plan: {},
-      hotel: {}
+      hotel: {},
+      isLoading: false
     };
   },
   components: {
@@ -74,17 +75,29 @@ export default {
   },
   methods: {
     submit(submission) {
-      console.log(submission);
+      this.isLoading = true
       axios
         .post("http://localhost:3000/generate", submission)
         .then(res => {
           this.plan = res.data.plan;
           this.hotel = res.data.hotel;
           console.log(this.plan);
-          // console.log(res.data.hotel);
+          this.isLoading = false
         })
         .catch(err => {
-          console.log(err);
+          console.log(err)
+          axios
+            .post("http://localhost:3000/generate", submission)
+            .then(res => {
+              this.plan = res.data.plan;
+              this.hotel = res.data.hotel;
+              console.log(this.plan);
+              this.isLoading = false
+            })
+            .catch(err => {
+              this.isLoading = false
+              console.log(err);
+            });
         });
     }
   },

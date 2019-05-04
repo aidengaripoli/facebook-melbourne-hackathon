@@ -58,7 +58,7 @@
         </div>
       </div>
     </div>
-    <button class="button is-primary" v-on:click="submit" value="Submit">Submit</button>
+    <button class="button is-primary" v-on:click="submit" :class="{ 'is-loading': isLoading }" value="Submit" :disabled="isLoading">Submit</button>
   </div>
 </template>
 
@@ -96,7 +96,11 @@ export default {
     };
   },
   props: {
-    msg: String
+    msg: String,
+    isLoading: {
+      type: Boolean,
+      default: false
+    }
   },
 
   mounted() {

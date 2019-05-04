@@ -5,7 +5,7 @@
         <Title/>
       </div>
       <div class="column is-7">
-        <InputForm @submit="handleSubmit"/>
+        <InputForm :isLoading="isLoading" @submit="handleSubmit"/>
       </div>
     </div>
   </div>
@@ -25,6 +25,7 @@ import Title from "@/components/Title.vue";
 
 export default {
   name: "Banner",
+  props: ['isLoading'],
   components: {
     InputForm,
     Title
