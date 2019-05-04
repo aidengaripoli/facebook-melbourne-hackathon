@@ -1,5 +1,6 @@
 <template>
-  <div class="column">
+<div class="columns is-centered">
+  <div class="column is-half">
     <div class="card large">
       <div class="card-image">
         <figure class="image is-square">
@@ -22,12 +23,51 @@
         </div>
       </div>
     </div>
+    <i class="arrow down"></i>
+    <br>
+    <i class="arrow down"></i>
+    <br>
+    <i class="arrow down"></i>
+    <br>
+    <i class="arrow down"></i>
+    <br>
+    <i class="arrow down"></i>
   </div>
+</div>
 </template>
+
+<style>
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+</style>
 
 <script>
 export default {
-  name: 'EventCard',
+  name: 'OutputEventCard',
   props: {
     eventName: String,
     eventStartDateTime: String,
