@@ -8,7 +8,7 @@
       <div class="notification is-link">Curating your trip...</div>
     </div>
 
-    <div v-if="plan[0]" class="events">
+    <div v-if="plan.length >= 1" class="events">
       <h1 v-if="hotel" class="title" style="padding-top: 3%">Accommodation</h1>
 
       <HotelCard
@@ -24,34 +24,21 @@
             <img v-if="day.weather == 'rainy'" src="../assets/rainy.png">
             <img v-else src="../assets/sunny.png">
           </h1>
-          <EventCard
-            :event="day.morningevent"
-            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-          />|
-          <br>|
-          <br>|
-          <br>|
-          <br>
-          <EventCard
-            :event="day.lunch"
-            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-          />|
-          <br>|
-          <br>|
-          <br>|
-          <br>
-          <EventCard
-            :event="day.middayevent"
-            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-          />|
-          <br>|
-          <br>|
-          <br>|
-          <br>
-          <EventCard
-            :event="day.dinner"
-            eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-          />
+          <div v-for="(event,key,index) in day" :key="index">
+            <span v-if="event != day.date">
+              <EventCard
+                :event="event"
+                eventDesc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+              />
+              <span v-if="event != day.dinner">
+                |
+                <br>|
+                <br>|
+                <br>|
+                <br>
+              </span>
+            </span>
+          </div>
           <button class="button is-info" @click="send">I like it! Send the itinerary to me!</button>
         </slide>
       </carousel>
@@ -123,7 +110,7 @@ export default {
         });
     },
     send: function() {
-      axios.post("http://localhost:3000/email", this.plan)
+      axios.post("http://localhost:3000/email", this.plan);
       // .then(res => {
       //   console.log(res);
       // })

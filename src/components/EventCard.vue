@@ -4,9 +4,9 @@
     style="padding-left: 7%; padding-right:15%; margin-top: 0.75rem;"
   >
     <div class="column" style="padding-right:5%">
-      <div class="title is-4">{{event.time[0]}}</div>
+      <div class="title is-4" v-if="event.time">{{event.time[0]}}</div>
       <div class="title is-4">-</div>
-      <div class="title is-4">{{event.time[1]}}</div>
+      <div class="title is-4" v-if="event.time">{{event.time[1]}}</div>
     </div>
     <div class="card column is-10 is-paddingless">
       <div class="card-content is-paddingless">
