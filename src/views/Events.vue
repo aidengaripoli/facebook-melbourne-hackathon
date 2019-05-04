@@ -1,6 +1,6 @@
 <template>
   <div class="events">
-    <div class="container thing">
+    <div class="container eventContainer">
       <div class="row columns" v-for="event in eventList" v-bind:key="event.eventId">
         <EventCard
           :eventName="event.eventName"
@@ -15,7 +15,7 @@
 </template>
 
 <style>
-.thing {
+.eventContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 0.5em;
