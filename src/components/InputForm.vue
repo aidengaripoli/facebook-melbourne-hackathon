@@ -98,6 +98,7 @@ export default {
     msg: String
   },
   mounted() {
+    /* global google */
     this.autocomplete = new google.maps.places.Autocomplete(
       this.$refs.autocomplete,
       { types: ["geocode"] }
