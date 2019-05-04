@@ -5,7 +5,7 @@
         <Title/>
       </div>
       <div class="column is-7">
-        <InputForm/>
+        <InputForm @submit="handleSubmit"/>
       </div>
     </div>
   </div>
@@ -28,6 +28,11 @@ export default {
   components: {
     InputForm,
     Title
+  },
+  methods: {
+    handleSubmit(submission) {
+      this.$emit('submit', submission)
+    }
   }
 };
 </script>

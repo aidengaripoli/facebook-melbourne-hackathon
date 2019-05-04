@@ -91,12 +91,14 @@ export default {
       startTime: Date,
       endTime: Date,
       travelers: 1,
-      checked: []
+      checked: [],
+      stuffs: []
     };
   },
   props: {
     msg: String
   },
+
   mounted() {
     /* global google */
     this.autocomplete = new google.maps.places.Autocomplete(
@@ -119,18 +121,18 @@ export default {
       }
 
       var submission = {
-        coordinates: {
-          lat: this.$data.location.geometry.location.lat(),
-          lng: this.$data.location.geometry.location.lng()
+        // address: this.$data.location.formatted_address,
+        location: {
+          cityName: this.$data.location.name,
+          cityLatLong: `${this.$data.location.geometry.location.lat()},${this.$data.location.geometry.location.lng()}`
         },
-        address: this.$data.location.formatted_address,
-        location: this.$data.location.name,
-        startTime: Date.parse(this.$data.startTime),
-        endTime: Date.parse(this.$data.endTime),
-        travelers: this.$data.travelers,
+        startTimestamp: Date.parse(this.$data.startTime),
+        endTimestamp: Date.parse(this.$data.endTime),
+        people: this.$data.travelers,
         criteria: checkedCriteria
       };
-      console.log(submission);
+
+      this.$emit('submit', submission)
     }
   }
 };
