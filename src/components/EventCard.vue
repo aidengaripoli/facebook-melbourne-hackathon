@@ -13,6 +13,8 @@
           <div class="column" style="padding: 20px">
             <h1 class="title is-4">{{event.name}}</h1>
             <i>{{eventDesc}}</i>
+            <p v-if="event.address">{{event.address}}</p>
+            <a v-if="event.website" :href="event.website">Website</a>
             <br>
             <b v-if="event.rating">Rating: {{event.rating}}/5</b>
           </div>
@@ -26,15 +28,6 @@
     </div>
   </div>
 </template>
-
-<style>
-.times {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
-  width: 100%;
-}
-</style>
 
 <script>
 export default {
