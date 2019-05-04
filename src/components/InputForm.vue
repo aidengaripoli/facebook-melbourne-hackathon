@@ -18,17 +18,17 @@
       <div class="columns">
         <div class="column">
           <label class="label">Start Date</label>
-          <input type="date" name="startDate">
+          <input type="date" name="startDate" v-model="startTime">
         </div>
         <div class="column">
           <label class="label">End Date</label>
-          <input type="date" name="endDate">
+          <input type="date" name="endDate" v-model="endTime">
         </div>
         <div class="column">
           <div class="field">
             <label class="label">Num Travelers</label>
             <div class="select">
-              <select>
+              <select v-model="travelers">
                 <option v-for="n in 10" v-bind:key="n">{{n}}</option>
               </select>
             </div>
@@ -37,30 +37,28 @@
       </div>
 
       <label class="label">Criteria</label>
-      <form action="/action_page.php">
-        <div class="columns" v-for="value in criteria.length/3" v-bind:key="value">
-          <div class="column is-offset-1 has-text-left">
-            <label class="checkbox">
-              <input type="checkbox" name="vehicle" :value="value">
-              {{ criteria[value-1] }}
-            </label>
-          </div>
-          <div class="column has-text-left">
-            <label class="checkbox">
-              <input type="checkbox" name="vehicle" :value="value">
-              {{ criteria[value+1] }}
-            </label>
-          </div>
-          <div class="column has-text-left">
-            <label class="checkbox">
-              <input type="checkbox" name="vehicle" :value="value">
-              {{ criteria[value+3] }}
-            </label>
-          </div>
+      <div class="columns" v-for="value in criteria.length/3" v-bind:key="value">
+        <div class="column is-offset-1 has-text-left">
+          <label class="checkbox">
+            <input type="checkbox" name="vehicle" :value="value" v-model="checked[value-1]">
+            {{ criteria[value-1] }}
+          </label>
         </div>
-      </form>
+        <div class="column has-text-left">
+          <label class="checkbox">
+            <input type="checkbox" name="vehicle" :value="value" v-model="checked[value+1]">
+            {{ criteria[value+1] }}
+          </label>
+        </div>
+        <div class="column has-text-left">
+          <label class="checkbox">
+            <input type="checkbox" name="vehicle" :value="value" v-model="checked[value+3]">
+            {{ criteria[value+3] }}
+          </label>
+        </div>
+      </div>
     </div>
-    <button class="button is-primary" type="submit" value="Submit">Submit</button>
+    <button class="button is-primary" v-on:click="submit" value="Submit">Submit</button>
   </div>
 </template>
 
@@ -81,7 +79,19 @@ export default {
   name: "Input",
   data() {
     return {
-      criteria: ["Romantic", "Sport", "Nature", "Scenery", "Museum", "Historic"]
+      criteria: [
+        "Romantic",
+        "Sport",
+        "Nature",
+        "Scenery",
+        "Museum",
+        "Historic"
+      ],
+      location: null,
+      startTime: Date,
+      endTime: Date,
+      travelers: 1,
+      checked: []
     };
   },
   props: {
@@ -92,6 +102,35 @@ export default {
       this.$refs.autocomplete,
       { types: ["geocode"] }
     );
+
+    this.autocomplete.addListener("place_changed", () => {
+      this.$data.location = this.autocomplete.getPlace();
+    });
+  },
+  methods: {
+    submit: function(event) {
+      var i;
+      var checkedCriteria = [];
+      for (i = 0; i < this.$data.criteria.length; i++) {
+        if (this.$data.checked[i]) {
+          checkedCriteria.push(this.$data.criteria[i]);
+        }
+      }
+
+      var submission = {
+        coordinates: {
+          lat: this.$data.location.geometry.location.lat(),
+          lng: this.$data.location.geometry.location.lng()
+        },
+        address: this.$data.location.formatted_address,
+        location: this.$data.location.name,
+        startTime: Date.parse(this.$data.startTime),
+        endTime: Date.parse(this.$data.endTime),
+        travelers: this.$data.travelers,
+        criteria: checkedCriteria
+      };
+      console.log(submission);
+    }
   }
 };
 </script>
