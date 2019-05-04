@@ -24,12 +24,12 @@ export default new Router({
     {
       path: '/events',
       name: 'events',
-      component: () => import(/* webpackChunkName: "about" */ './views/Events.vue')
+      component: () => import(/* webpackChunkName: "events" */ './views/Events.vue')
     },
     {
       path: '/output',
       name: 'output',
-      component: () => import(/* webpackChunkName: "about" */ './views/Output.vue')
+      component: () => import(/* webpackChunkName: "output" */ './views/Output.vue')
     }
   ]
 })
