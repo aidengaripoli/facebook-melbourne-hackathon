@@ -17,7 +17,15 @@
             <div class="control">
               <label class="label">Location</label>
 
-              <input class="input is-info" type="text" placeholder="Enter a location">
+              <input
+                ref="autocomplete"
+                placeholder="Search"
+                class="input is-info"
+                onfocus="value = ''"
+                type="text"
+              >
+
+              <!-- <input class="input is-info" type="text" placeholder="Enter a location"> -->
             </div>
           </div>
         </div>
@@ -73,6 +81,12 @@ export default {
   },
   props: {
     msg: String
+  },
+  mounted() {
+    this.autocomplete = new google.maps.places.Autocomplete(
+      this.$refs.autocomplete,
+      { types: ["geocode"] }
+    );
   }
 };
 </script>

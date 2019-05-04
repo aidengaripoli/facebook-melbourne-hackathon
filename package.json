@@ -14,6 +14,9 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.3"
   },
+  "keywords": [
+    "google"
+  ],
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
